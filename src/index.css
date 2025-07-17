@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Play", sans-serif;
+  --color-blue: #1284b5;
+  --color-halftone-blue: #74cde9;
+  --color-pastel-blue: #c3ecf6;
+  --color-dark: #102e46;
+  --color-halftone-dark: #5c6d80;
+  --color-pastel-dark: #97b4d3;
+  --color-black: #202124;
+}
