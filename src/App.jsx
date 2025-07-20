@@ -7,6 +7,7 @@ import ButtonHome from "./components/ButtonHome";
 import ButtonGameMenu from "./components/ButtonGameMenu";
 import { shuffleArray } from "./utils/shuffle";
 import { themes } from "./utils/themes";
+import { defaultTimer, stageLevels } from "./utils/config";
 import {
   faHome,
   faRefresh,
@@ -24,21 +25,15 @@ function App() {
   const [totalMove, setTotalMove] = useState(0);
   const [totalMatched, setTotalMatched] = useState(0);
   const [showModal, setShowModal] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(defaultTimer);
   const [gameOver, setGameOver] = useState(false);
   const [disableClick, setDisableClick] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [highScore, setHighScore] = useState([1, 0, 0]); // 1 -> untuk stage, 0 -> untuk totalMatched, 0 -> untuk totalMove
 
-  const getCardCount = (level) => {
-    if (level === "mudah") return 8;
-    if (level === "sedang") return 12;
-    if (level === "sulit") return 18;
-  };
-
   const generateCards = useCallback(() => {
     const selectedTheme = themes.find((t) => t.title === theme).icons;
-    const pairCount = getCardCount(level);
+    const pairCount = stageLevels.find((lvl) => (lvl.title = level)).totalCard;
     const selected = shuffleArray(selectedTheme).slice(0, pairCount);
     const double = shuffleArray(
       [...selected, ...selected].map((e, i) => ({ emoji: e, id: i }))
@@ -109,7 +104,7 @@ function App() {
     setStage(1);
     setTotalMove(0);
     setTotalMatched(0);
-    setTimeLeft(40);
+    setTimeLeft(defaultTimer);
     setGameOver(false);
     setCards([]);
     setMatched([]);
